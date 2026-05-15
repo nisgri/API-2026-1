@@ -1,4 +1,4 @@
-package br.com.serratec.aula3.controller;
+package br.com.serratec.aula4.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.serratec.aula3.model.Produto;
-import br.com.serratec.aula3.repository.ProdutoRepository;
+import br.com.serratec.aula4.model.Produto;
+import br.com.serratec.aula4.repository.ProdutoRepository;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/produtos")
@@ -27,7 +28,7 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Produto inserir(@RequestBody Produto produto) {
+    public Produto inserir(@Valid @RequestBody Produto produto) {
         return repository.save(produto);
     }
 
@@ -37,7 +38,7 @@ public class ProdutoController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Produto> alterar(@RequestBody Produto produto, @PathVariable Long id) {
+    public ResponseEntity<Produto> alterar(@Valid @RequestBody Produto produto, @PathVariable Long id) {
         Optional<Produto> produtoOptional = repository.findById(id);
         if(produtoOptional.isPresent()) {
             produto.setId(id);

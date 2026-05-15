@@ -1,4 +1,4 @@
-package br.com.serratec.aula3.controller;
+package br.com.serratec.aula5.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,34 +16,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.serratec.aula3.model.Produto;
-import br.com.serratec.aula3.repository.ProdutoRepository;
+import br.com.serratec.aula5.model.Funcionario;
+import br.com.serratec.aula5.repository.FuncionarioRepository;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/funcionarios")
+public class FuncionarioController {
     @Autowired
-    private ProdutoRepository repository;
+    private FuncionarioRepository repository;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Produto inserir(@RequestBody Produto produto) {
-        return repository.save(produto);
-    }
-
-    @GetMapping
-    public List<Produto> listar() {
-        return repository.findAll();
+    public Funcionario inserir(@Valid @RequestBody Funcionario funcionario) {
+        return repository.save(funcionario);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Produto> alterar(@RequestBody Produto produto, @PathVariable Long id) {
-        Optional<Produto> produtoOptional = repository.findById(id);
-        if(produtoOptional.isPresent()) {
-            produto.setId(id);
-            return ResponseEntity.ok(repository.save(produto));
+    public ResponseEntity<Funcionario> atualizar(@Valid @RequestBody Funcionario funcionario, @PathVariable Long id) {
+        if(repository.existsById(id)) {
+            funcionario.setId(id);
+            return ResponseEntity.ok(repository.save(funcionario));
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Funcionario> buscar(@PathVariable Long id) {
+        Optional<Funcionario> funcionario= repository.findById(id);
+        if(funcionario.isPresent()) {
+            return ResponseEntity.ok(funcionario.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping
+    public List<Funcionario> listar() {
+        return repository.findAll();
     }
 
     @DeleteMapping("{id}")

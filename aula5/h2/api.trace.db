@@ -1,0 +1,36 @@
+2026-05-14 19:22:11.535475-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "drop [*]veiculo_manutencoes"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, MATERIALIZED, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, AGGREGATE, SYNONYM"; SQL statement:
+drop veiculo_manutencoes [42001-240]
+2026-05-14 19:37:41.640241-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:37:43.279760-03:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:37:51.953614-03:00 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:38:11.754784-03:00 jdbc[43]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:39:47.609880-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:48:47.202078-03:00 jdbc[16]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:48:53.903045-03:00 jdbc[26]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:48:57.534167-03:00 jdbc[36]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:48:59.147099-03:00 jdbc[46]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:51:14.886475-03:00 jdbc[57]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]
+2026-05-14 19:51:19.513668-03:00 jdbc[67]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_MANUTENCAO" already exists; SQL statement:
+create global temporary table HTE_manutencao(dataEntrada date, dataSaida date, rn_ integer not null, id bigint, veiculo_id bigint, descricao varchar(255), primary key (rn_)) transactional [42101-240]

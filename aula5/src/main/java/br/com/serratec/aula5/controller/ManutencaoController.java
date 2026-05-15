@@ -1,4 +1,4 @@
-package br.com.serratec.aula3.controller;
+package br.com.serratec.aula5.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,34 +16,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.serratec.aula3.model.Produto;
-import br.com.serratec.aula3.repository.ProdutoRepository;
+import br.com.serratec.aula5.model.Manutencao;
+import br.com.serratec.aula5.repository.ManutencaoRepository;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/manutencoes")
+public class ManutencaoController {
     @Autowired
-    private ProdutoRepository repository;
+    private ManutencaoRepository repository;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Produto inserir(@RequestBody Produto produto) {
-        return repository.save(produto);
-    }
-
-    @GetMapping
-    public List<Produto> listar() {
-        return repository.findAll();
+    public Manutencao inserir(@Valid @RequestBody Manutencao manutencao) {
+        return repository.save(manutencao);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Produto> alterar(@RequestBody Produto produto, @PathVariable Long id) {
-        Optional<Produto> produtoOptional = repository.findById(id);
-        if(produtoOptional.isPresent()) {
-            produto.setId(id);
-            return ResponseEntity.ok(repository.save(produto));
+    public ResponseEntity<Manutencao> atualizar(@Valid @RequestBody Manutencao manutencao, @PathVariable Long id) {
+        if(repository.existsById(id)) {
+            manutencao.setId(id);
+            return ResponseEntity.ok(repository.save(manutencao));
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Manutencao> buscar(@PathVariable Long id) {
+        Optional<Manutencao> manutencao= repository.findById(id);
+        if(manutencao.isPresent()) {
+            return ResponseEntity.ok(manutencao.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping
+    public List<Manutencao> listar() {
+        return repository.findAll();
     }
 
     @DeleteMapping("{id}")
