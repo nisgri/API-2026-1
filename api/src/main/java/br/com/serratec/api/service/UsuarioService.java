@@ -1,27 +1,43 @@
 package br.com.serratec.api.service;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.serratec.api.configuration.MailConfig;
 import br.com.serratec.api.dto.UsuarioRequestDTO;
 import br.com.serratec.api.dto.UsuarioResponseDTO;
 import br.com.serratec.api.exception.UsuarioException;
 import br.com.serratec.api.model.Usuario;
+import br.com.serratec.api.model.UsuarioPerfil;
+import br.com.serratec.api.repository.UsuarioPerfilRepository;
 import br.com.serratec.api.repository.UsuarioRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class UsuarioService {
     @Autowired
+    private PerfilService perfilService;
+
+    @Autowired
     private UsuarioRepository repository;
+
+    @Autowired
+    private UsuarioPerfilRepository usuarioPerfilRepository;
     
     @Autowired
     private BCryptPasswordEncoder criptografar;
+
+    @Autowired
+    private MailConfig config;
+
+    UsuarioService(PerfilService perfilService) {
+        this.perfilService = perfilService;
+    }
 
     public List<UsuarioResponseDTO> listar() {
         return repository.findAll().stream()
@@ -29,6 +45,7 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public UsuarioResponseDTO inserir(UsuarioRequestDTO dto){
         Usuario usuarioBanco = repository.findByEmail(dto.getEmail());
         if (usuarioBanco != null) {
@@ -37,9 +54,18 @@ public class UsuarioService {
         Usuario usuario= new Usuario();
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
-        usuario.setSenha(criptografar.encode(dto.getSenha()));
-        
+        usuario.setSenha(criptografar.encode(dto.getSenha()));        
         Usuario usuarioSalvo= repository.save(usuario);
+
+        for(UsuarioPerfil up: dto.getUsuarioPerfis()) {
+            up.setUsuario(usuarioSalvo);
+            up.setPerfil(perfilService.buscar(up.getPerfil().getId()).get());
+            up.setDataCriacao(LocalDate.now());
+            up.setAtivo(true);
+        }
+        usuarioPerfilRepository.saveAll(dto.getUsuarioPerfis());
+        //config.sendEmail(dto.getEmail(), "Cadastro de novo usuário", usuarioSalvo.toString());
+
         return new UsuarioResponseDTO(usuarioSalvo.getId(), usuarioSalvo.getNome(), usuarioSalvo.getEmail());
     }
 

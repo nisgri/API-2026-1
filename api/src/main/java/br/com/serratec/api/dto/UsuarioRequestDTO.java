@@ -1,9 +1,16 @@
 package br.com.serratec.api.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import br.com.serratec.api.model.UsuarioPerfil;
+
 public class UsuarioRequestDTO {
     private String nome;
     private String senha;
     private String email;
+
+    private Set<UsuarioPerfil> usuarioPerfis= new HashSet<>();
 
     public UsuarioRequestDTO(String nome, String senha, String email) {
         this.nome = nome;
@@ -33,6 +40,10 @@ public class UsuarioRequestDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<UsuarioPerfil> getUsuarioPerfis() {
+        return usuarioPerfis;
     }
 
 }
